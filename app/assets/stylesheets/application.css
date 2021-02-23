@@ -19,11 +19,10 @@
 }
 
 .footer {
-  bottom: 0;
-  color: #707070;
-  height: 5em;
-  left: 0;
   position: static;
   font-size: small;
   width:100%;
+  padding-top: 13rem;
  }
+
+ 
