@@ -7,12 +7,13 @@ const app = {
 
   openTrivia: function() {
     document.getElementById('carousel').remove();
-    let ctx = document.createElement('canvas');
-    document.getElementById('carousel-parent').appendChild(ctx);
-    ctx = canvas.getContext("2d");
-    ctx.width = innerWidth - 150;
-    ctx.height = 500;
-    ctx.fillStyle = 'black';
+    let canvas = document.createElement('canvas');
+    canvas.width = innerWidth - 150;
+    canvas.height = 500;
+    document.getElementById('carousel-parent').appendChild(canvas);
+    let ctx = canvas.getContext('2d');
+    // ctx.fillStyle = 'black';
+    // ctx.fill();
   }
   
 }
