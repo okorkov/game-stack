@@ -19,5 +19,24 @@ class QuestionGenerator < ApplicationRecord
     result = JSON.parse(response.read_body)
   end
 
+  def self.save_questions
+    counter = 1
+    while counter < 30
+      question_array = QuestionGenerator.generate_questions['results']
+      question_array.each do |qst|
+      hash = {
+        category: qst['category'],
+        difficulty: qst['difficulty'],
+        question: qst['question'],
+        correct_answer: qst['correct_answer'],
+        incorrect_answer_1: qst['incorrect_answers'][0],
+        incorrect_answer_2: qst['incorrect_answers'][1],
+        incorrect_answer_3: qst['incorrect_answers'][2]
+      }
+        Trivium.create(hash)
+      end
+      counter +=1
+    end
+  end
 
 end
