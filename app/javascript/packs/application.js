@@ -10,9 +10,5 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 
-// require("packs/init")
+require("packs/app")
 
-
-// = link_tree ../images
-//= link_directory ../stylesheets .css
-//= link_directory ../javascript .js
