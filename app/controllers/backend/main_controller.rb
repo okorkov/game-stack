@@ -1,18 +1,15 @@
 class Backend::MainController < ApplicationController
 
   def easy_question
-    question = Trivium.where(difficulty: "easy").limit(1).order("RANDOM()")[0]
-    render json: question
+    render json: Trivium.get_questions_by_difficulty('easy')
   end
 
   def medium_question
-    question = Trivium.where(difficulty: "medium").limit(1).order("RANDOM()")[0]
-    render json: question
+    render json: Trivium.get_questions_by_difficulty('medium')
   end
 
   def hard_question
-    question = Trivium.where(difficulty: "hard").limit(1).order("RANDOM()")[0]
-    render json: question
+    render json: Trivium.get_questions_by_difficulty('hard')
   end
 
 end
