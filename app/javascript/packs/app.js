@@ -94,7 +94,7 @@ const app = {
       } else {
         selectAnswer.className = 'col btn btn-danger questions'
         setTimeout(function(){
-          console.log('YOU LOST')
+          app.finishGame()
         }, 1000)
       }
       return null;
@@ -107,9 +107,15 @@ const app = {
         answerArray[i].className = "col btn btn-primary questions";
     }
     return null;
+  },
+
+  finishGame: function() {
+    
   }
 
 }
 
 document.addEventListener("DOMContentLoaded", app.init)
+
+
 
