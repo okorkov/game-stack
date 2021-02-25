@@ -1,33 +1,33 @@
 
 // Trivia Section
 const triviaTemplate = `
-<div class='p-5 text-center bg-image'>
-  <div class='mask' style='background-color: rgba(0, 0, 0, 0.6); padding: 50px; margin: 20px;'>
-    <div class='d-flex justify-content-center align-items-center h-100'>
-      <div class='text-white'>
-        <h1 class='mb-3 text-uppercase' style="color:#931A00;">Trivia Game</h1>
-        <h1 id="players-name-form"></h1>
-        <h3 id='score' style="color:yellow;">Score: 
-        <span>0</span>
-        </h3>
-        <div id ="question-and-answers">
-          <h3 id='question'> </h3>
-          <div class="container">
-            <div class="row">
-            <button id="ans-1" type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
-            <br><br/>
-            <button id="ans-2" type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
-              <div class="w-100"></div>
-            <button id="ans-3" type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
-            <br><br/>
-            <button id="ans-4" type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
-          </div>
+  <div class='p-5 text-center bg-image' id="trivia-template">
+    <div class='mask' style='background-color: rgba(0, 0, 0, 0.6); padding: 50px; margin: 20px;'>
+      <div class='d-flex justify-content-center align-items-center h-100'>
+        <div class='text-white'>
+          <h1 class='mb-3 text-uppercase' style="color:#931A00;">Trivia Game</h1>
+          <h1 id="players-name-form"></h1>
+          <h3 id='score' style="color:yellow;">Score: 
+          <span>0</span>
+          </h3>
+          <div id ="question-and-answers">
+            <h3 id='question'> </h3>
+            <div class="container">
+              <div class="row">
+              <button id="ans-1" type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
+              <br><br/>
+              <button id="ans-2" type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
+                <div class="w-100"></div>
+              <button id="ans-3" type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
+              <br><br/>
+              <button id="ans-4" type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
+            </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>`;
+  </div>`;
 
 const scoreForm = `
 <div class="col d-flex justify-content-center text-center">
@@ -143,12 +143,26 @@ const app = {
   fillScores: function(object) {
     const tableBody = document.getElementById('table-body')
     for(let i = 0; i < object.length; i++) {
-      let tr = document.createElement('tr')
+      let tr = document.createElement('tr');
       tr.innerHTML = `
       <td>${object[i].score}</td>
       <td>${object[i].name}</td>`
-      tableBody.appendChild(tr)
+      tableBody.appendChild(tr);
     }
+    app.submitScore();
+    app.playAgain();
+  },
+
+  playAgain: function() {
+    document.getElementById('play-again').addEventListener('click', function() {
+      document.getElementById('trivia-template').remove();
+      document.getElementById('carousel-parent').insertAdjacentHTML('afterend', triviaTemplate);
+      app.startGame();
+    })
+  },
+
+  submitScore: function() {
+    
   }
 
 }
