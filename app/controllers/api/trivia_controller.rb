@@ -17,7 +17,8 @@ class Api::TriviaController < ApplicationController
   end
 
   def trivia_top_10_players
-    render json: TriviaScore.all
+    scores = TriviaScore.order("score DESC").limit(10)
+    render json: scores ,except: [:id]
   end
 
 end

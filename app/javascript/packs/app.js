@@ -125,6 +125,7 @@ const app = {
     document.getElementById('ans-3').remove()
     document.getElementById('ans-4').remove()
     document.getElementById('score').insertAdjacentHTML('afterend', scoreForm);
+    
   }
 
 }
