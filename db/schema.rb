@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_24_003351) do
+ActiveRecord::Schema.define(version: 2021_02_25_200132) do
 
   create_table "trivia", force: :cascade do |t|
     t.string "category"
@@ -20,6 +20,11 @@ ActiveRecord::Schema.define(version: 2021_02_24_003351) do
     t.string "incorrect_answer_1"
     t.string "incorrect_answer_2"
     t.string "incorrect_answer_3"
+  end
+
+  create_table "trivia_scores", force: :cascade do |t|
+    t.integer "score"
+    t.string "name"
   end
 
 end

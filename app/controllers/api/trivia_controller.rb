@@ -16,4 +16,8 @@ class Api::TriviaController < ApplicationController
     render json: Trivium.order(Arel.sql('RANDOM()')).first
   end
 
+  def trivia_top_10_players
+    
+  end
+
 end

@@ -1,0 +1,3 @@
+class TriviaScore < ApplicationRecord
+ 
+end
