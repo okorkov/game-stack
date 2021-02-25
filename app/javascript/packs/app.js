@@ -41,13 +41,14 @@ const scoreForm = `
 <table class="table table-dark table-striped table-bordered">
   <thead>
     <tr>
-      <th scope="col"><strong>Score</strong></th>
-      <th scope="col"><strong>Name</strong></th>
+      <th scope="col"><strong>Top Scores</strong></th>
+      <th scope="col"><strong>Gamer's Name</strong></th>
     </tr>
   </thead>
   <tbody id="table-body">
   </tbody>
-</table>`;
+</table>
+<button id="play-again" class="btn btn-outline-success btn-lg">Play Again!</button>`;
 
 
 
@@ -154,9 +155,3 @@ const app = {
 
 document.addEventListener("DOMContentLoaded", app.init)
 
-
-
-// <tr>
-// <td>500</td>
-// <td>Alex</td>
-// </tr>
