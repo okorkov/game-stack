@@ -22,9 +22,9 @@
   position: static;
   font-size: small;
   width:100%;
-  padding-top: 10rem;
+  padding-top: 3rem;
  }
 
-canvas { 
-  border: 1px solid rgb(63, 57, 3); 
+#carousel { 
+  padding-bottom: 7rem;
 }
