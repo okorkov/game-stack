@@ -10,7 +10,7 @@ const triviaBackground = `
         <h3 id='score' style="color:yellow;">Score: 
         <span>0</span>
         </h3>
-        <h3 id='question'>Question: </h3>
+        <h3 id='question'> </h3>
         <div class="container">
           <div class="row">
           <button type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
@@ -48,7 +48,7 @@ const app = {
   renderQuestion: function() {
     fetch(`http://localhost:3000/api/trivia/random_question`).then(object => object.json()).then(object => {
       const correctAnswer = object.correct_answer
-      document.getElementById('question').innerHTML += object.question
+      document.getElementById('question').innerHTML = `Question: ${object.question}`
       const answers = [object.incorrect_answer_1, object.incorrect_answer_2, object.incorrect_answer_3, object.correct_answer]
       app.shuffle(answers);
       let answerArray = document.getElementsByClassName("questions");
@@ -59,6 +59,7 @@ const app = {
           answerArray[i].innerHTML = answers[i];
           answerArray[i].addEventListener('click', function(e){
             e.target.className = 'col btn btn-warning questions'
+            app.checkAnswer(correctAnswer, answerArray[i])
           })
         }
       }
@@ -79,6 +80,33 @@ const app = {
 
   startGame: function() {
     app.renderQuestion(); 
+  },
+
+  checkAnswer: function(correctAnswer, selectAnswer) {
+    setTimeout(function(){
+      if (correctAnswer === selectAnswer.innerHTML) {
+        selectAnswer.className = 'col btn btn-success questions'
+        setTimeout(function(){
+          document.getElementById('score').childNodes[1].innerHTML = parseInt(document.getElementById('score').childNodes[1].innerHTML) + 100;
+          app.renderQuestion()
+          app.resetAnswerColors();
+        }, 1000);
+      } else {
+        selectAnswer.className = 'col btn btn-danger questions'
+        setTimeout(function(){
+          console.log('YOU LOST')
+        }, 1000)
+      }
+      return null;
+    }, 1000)
+  },
+
+  resetAnswerColors: function() {
+    let answerArray = document.getElementsByClassName("questions");
+    for(let i = 0; i < answerArray.length; i++) {
+        answerArray[i].className = "col btn btn-primary questions";
+    }
+    return null;
   }
 
 }
