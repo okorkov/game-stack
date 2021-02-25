@@ -17,7 +17,7 @@ class Api::TriviaController < ApplicationController
   end
 
   def trivia_top_10_players
-    
+    render json: TriviaScore.all
   end
 
 end

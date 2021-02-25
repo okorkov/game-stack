@@ -1,6 +1,6 @@
 
 // Trivia Section
-const triviaBackground = `
+const triviaTemplate = `
 <div class='p-5 text-center bg-image'>
   <div class='mask' style='background-color: rgba(0, 0, 0, 0.6); padding: 50px; margin: 20px;'>
     <div class='d-flex justify-content-center align-items-center h-100'>
@@ -41,7 +41,7 @@ const app = {
 
   openTrivia: function() {
     document.getElementById('carousel').remove();
-    document.getElementById('carousel-parent').insertAdjacentHTML('afterend', triviaBackground);
+    document.getElementById('carousel-parent').insertAdjacentHTML('afterend', triviaTemplate);
     app.startGame();
   },
 
@@ -110,6 +110,11 @@ const app = {
   },
 
   finishGame: function() {
+    document.getElementById('question').remove()
+    let elementsToRemove = document.getElementsByClassName("questions")
+    for(let i = 0; i < elementsToRemove.length; i++) {
+      elementsToRemove[i].remove()
+    }
     
   }
 
