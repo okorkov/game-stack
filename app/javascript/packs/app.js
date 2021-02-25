@@ -34,7 +34,24 @@ const scoreForm = `
   <br>
   <input type="submit" class="btn btn-outline-warning" value="Get on the Board" required>
   </form>
-</div>`;
+</div>
+<br>
+<table class="table table-dark table-striped table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Score</th>
+      <th scope="col">Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>500</td>
+      <td>Alex</td>
+    </tr>
+  </tbody>
+</table>`;
+
+
 
 
 const app = {
@@ -125,7 +142,7 @@ const app = {
     document.getElementById('ans-3').remove()
     document.getElementById('ans-4').remove()
     document.getElementById('score').insertAdjacentHTML('afterend', scoreForm);
-    
+
   }
 
 }
