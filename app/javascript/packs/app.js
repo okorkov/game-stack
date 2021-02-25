@@ -15,7 +15,7 @@ const triviaBackground = `
           <div class="row">
           <button type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
           <br><br/>
-          <button type="button" class=" col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
+          <button type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
             <div class="w-100"></div>
           <button type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
           <br><br/>
@@ -53,7 +53,14 @@ const app = {
       app.shuffle(answers);
       let answerArray = document.getElementsByClassName("questions");
       for(let i = 0; i < answerArray.length; i++) {
-        answerArray[i].innerHTML = answers[i]
+        if(answers[i] === null || answers[i] === undefined){
+          answerArray[i].style.visibility = "hidden";
+        } else {
+          answerArray[i].innerHTML = answers[i];
+          answerArray[i].addEventListener('click', function(e){
+            e.target.className = 'col btn btn-warning questions'
+          })
+        }
       }
     });
   },
