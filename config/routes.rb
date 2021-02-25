@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get 'trivia/easy_question'
     get 'trivia/medium_question'
     get 'trivia/hard_question'
+    get 'trivia/random_question'
   end
 
 end

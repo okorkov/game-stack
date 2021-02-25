@@ -12,4 +12,8 @@ class Api::TriviaController < ApplicationController
     render json: Trivium.get_questions_by_difficulty('hard')
   end
 
+  def random_question
+    render json: Trivium.order(Arel.sql('RANDOM()')).first
+  end
+
 end
