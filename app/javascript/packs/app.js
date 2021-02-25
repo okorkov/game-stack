@@ -13,19 +13,28 @@ const triviaTemplate = `
         <h3 id='question'> </h3>
         <div class="container">
           <div class="row">
-          <button type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
+          <button id="ans-1" type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
           <br><br/>
-          <button type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
+          <button id="ans-2" type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
             <div class="w-100"></div>
-          <button type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
+          <button id="ans-3" type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
           <br><br/>
-          <button type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
+          <button id="ans-4" type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>`
+</div>`;
+
+const scoreForm = `
+<div class="col d-flex justify-content-center text-center">
+  <form action="/" method="post" id="submit-score">
+  <input type="text" class="input-group" style="width: 200px;" placeholder="Enter your name here ...">
+  <br>
+  <input type="submit" class="btn btn-outline-warning" value="Get on the Board" required>
+  </form>
+</div>`;
 
 
 const app = {
@@ -111,11 +120,11 @@ const app = {
 
   finishGame: function() {
     document.getElementById('question').remove()
-    let elementsToRemove = document.getElementsByClassName("questions")
-    for(let i = 0; i < elementsToRemove.length; i++) {
-      elementsToRemove[i].remove()
-    }
-    
+    document.getElementById('ans-1').remove()
+    document.getElementById('ans-2').remove()
+    document.getElementById('ans-3').remove()
+    document.getElementById('ans-4').remove()
+    document.getElementById('score').insertAdjacentHTML('afterend', scoreForm);
   }
 
 }
