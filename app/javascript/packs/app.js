@@ -10,16 +10,18 @@ const triviaTemplate = `
         <h3 id='score' style="color:yellow;">Score: 
         <span>0</span>
         </h3>
-        <h3 id='question'> </h3>
-        <div class="container">
-          <div class="row">
-          <button id="ans-1" type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
-          <br><br/>
-          <button id="ans-2" type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
-            <div class="w-100"></div>
-          <button id="ans-3" type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
-          <br><br/>
-          <button id="ans-4" type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
+        <div id ="question-and-answers">
+          <h3 id='question'> </h3>
+          <div class="container">
+            <div class="row">
+            <button id="ans-1" type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
+            <br><br/>
+            <button id="ans-2" type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
+              <div class="w-100"></div>
+            <button id="ans-3" type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
+            <br><br/>
+            <button id="ans-4" type="button" class="col btn btn-primary questions" style="margin:2em;padding:25px;"></button>
+          </div>
           </div>
         </div>
       </div>
@@ -39,15 +41,11 @@ const scoreForm = `
 <table class="table table-dark table-striped table-bordered">
   <thead>
     <tr>
-      <th scope="col">Score</th>
-      <th scope="col">Name</th>
+      <th scope="col"><strong>Score</strong></th>
+      <th scope="col"><strong>Name</strong></th>
     </tr>
   </thead>
-  <tbody>
-    <tr>
-      <td>500</td>
-      <td>Alex</td>
-    </tr>
+  <tbody id="table-body">
   </tbody>
 </table>`;
 
@@ -136,13 +134,20 @@ const app = {
   },
 
   finishGame: function() {
-    document.getElementById('question').remove()
-    document.getElementById('ans-1').remove()
-    document.getElementById('ans-2').remove()
-    document.getElementById('ans-3').remove()
-    document.getElementById('ans-4').remove()
+    document.getElementById('question-and-answers').remove()
     document.getElementById('score').insertAdjacentHTML('afterend', scoreForm);
+    fetch(`http://localhost:3000/api/trivia/trivia_top_10_players`).then(object => object.json()).then(object => app.fillScores(object))
+  },
 
+  fillScores: function(object) {
+    const tableBody = document.getElementById('table-body')
+    for(let i = 0; i < object.length; i++) {
+      let tr = document.createElement('tr')
+      tr.innerHTML = `
+      <td>${object[i].score}</td>
+      <td>${object[i].name}</td>`
+      tableBody.appendChild(tr)
+    }
   }
 
 }
@@ -151,3 +156,7 @@ document.addEventListener("DOMContentLoaded", app.init)
 
 
 
+// <tr>
+// <td>500</td>
+// <td>Alex</td>
+// </tr>
