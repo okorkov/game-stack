@@ -10,5 +10,5 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 
-require("packs/app")
+require("packs/trivia")
 

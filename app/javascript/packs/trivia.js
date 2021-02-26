@@ -1,4 +1,4 @@
-const domain = 'https://game-stack.herokuapp.com/'
+const domain = 'http://localhost:3000'
 // 'https://game-stack.herokuapp.com/'
 // 'http://localhost:3000'
 // Trivia Section
@@ -122,10 +122,11 @@ const app = {
           app.resetAnswerColors();
         }, 1000);
       } else {
-        selectAnswer.className = 'col btn btn-danger questions'
+        selectAnswer.className = 'col btn btn-danger questions';
         setTimeout(function(){
+          alert(`Correct Answer is: ${correctAnswer}`);
           app.finishGame()
-        }, 1000)
+        }, 1500)
       }
       return null;
     }, 1000)
