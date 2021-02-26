@@ -53,7 +53,7 @@ const scoreTable = `<br>
   </tbody>
 </table>`;
 
-
+let answerArray
 
 
 const app = {
@@ -77,19 +77,21 @@ const app = {
 
   renderQuestion: function() {
     fetch(`${domain}/api/trivia/random_question`).then(object => object.json()).then(object => {
-      const correctAnswer = object.correct_answer
       document.getElementById('question').innerHTML = `Question: ${object.question}`
-      const answers = [object.incorrect_answer_1, object.incorrect_answer_2, object.incorrect_answer_3, object.correct_answer]
+      correctAnswer = object.correct_answer;
+      let answers = [object.incorrect_answer_1, object.incorrect_answer_2, object.incorrect_answer_3, object.correct_answer]
       app.shuffle(answers);
       let answerArray = document.getElementsByClassName("questions");
       for(let i = 0; i < answerArray.length; i++) {
         if(answers[i] === null || answers[i] === undefined){
           answerArray[i].style.visibility = "hidden";
         } else {
+          answerArray[i].style.visibility = "visible";
           answerArray[i].innerHTML = answers[i];
           answerArray[i].addEventListener('click', function(e){
             e.target.className = 'col btn btn-warning questions'
-            app.checkAnswer(correctAnswer, answerArray[i])
+            app.checkAnswer(correctAnswer, answerArray[i]);
+            return null;
           })
         }
       }
@@ -118,8 +120,10 @@ const app = {
         selectAnswer.className = 'col btn btn-success questions'
         setTimeout(function(){
           document.getElementById('score').childNodes[1].innerHTML = parseInt(document.getElementById('score').childNodes[1].innerHTML) + 100;
-          app.renderQuestion()
           app.resetAnswerColors();
+          app.renderQuestion()
+          correctAnswer = null;
+          return null;
         }, 1000);
       } else {
         selectAnswer.className = 'col btn btn-danger questions';
