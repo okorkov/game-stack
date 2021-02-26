@@ -1,4 +1,5 @@
-
+const domain = 'https://game-stack.herokuapp.com/'
+// 'http://localhost:3000'
 // Trivia Section
 const triviaTemplate = `
   <div class='p-5 text-center bg-image' id="trivia-template">
@@ -71,7 +72,7 @@ const app = {
   },
 
   renderQuestion: function() {
-    fetch(`http://localhost:3000/api/trivia/random_question`).then(object => object.json()).then(object => {
+    fetch(`${domain}/api/trivia/random_question`).then(object => object.json()).then(object => {
       const correctAnswer = object.correct_answer
       document.getElementById('question').innerHTML = `Question: ${object.question}`
       const answers = [object.incorrect_answer_1, object.incorrect_answer_2, object.incorrect_answer_3, object.correct_answer]
@@ -137,7 +138,7 @@ const app = {
   finishGame: function() {
     document.getElementById('question-and-answers').remove()
     document.getElementById('score').insertAdjacentHTML('afterend', scoreForm);
-    fetch(`http://localhost:3000/api/trivia/trivia_top_10_players`).then(object => object.json()).then(object => app.fillScores(object))
+    fetch(`${domain}/api/trivia/trivia_top_10_players`).then(object => object.json()).then(object => app.fillScores(object))
   },
 
   fillScores: function(object) {
