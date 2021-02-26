@@ -1,4 +1,5 @@
-const domain = 'https://game-stack.herokuapp.com/'
+const domain = 'http://localhost:3000'
+// 'https://game-stack.herokuapp.com/'
 // 'http://localhost:3000'
 // Trivia Section
 const triviaTemplate = `
@@ -163,7 +164,10 @@ const app = {
   },
 
   submitScore: function() {
-    
+    document.getElementById('submit-score').addEventListener('submit', function(e) {
+      console.log('submitted form')
+      e.preventDefault();
+    })
   }
 
 }
