@@ -1,4 +1,4 @@
-const domain = 'http://localhost:3000'
+const domain = 'https://game-stack.herokuapp.com/'
 // 'https://game-stack.herokuapp.com/'
 // 'http://localhost:3000'
 // Trivia Section
@@ -169,6 +169,7 @@ const app = {
       const score = parseInt(document.getElementById('score').childNodes[1].innerHTML);
       app.submitData(name, score);
       document.getElementById('submit-score').remove();
+      //
       e.preventDefault();
     })
   },
@@ -184,12 +185,8 @@ const app = {
     }
     return fetch('http://localhost:3000/api/trivia/add_score', config)
     .then(function(response) {
-      return response.json();
-    })
-    .then(function(object) {
-      console.log(object);
-    })
-    .catch(function(error) {
+      return response.text();
+    }).catch(function(error) {
       alert("Failed to save score");
       console.log(error.message);
       return error.message;
