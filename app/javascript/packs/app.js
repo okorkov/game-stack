@@ -34,9 +34,9 @@ const triviaTemplate = `
 const scoreForm = `
 <div class="col d-flex justify-content-center text-center">
   <form action="/" method="post" id="submit-score">
-  <input type="text" class="input-group" style="width: 200px;" placeholder="Enter your name here ...">
+  <input type="text" class="input-group" style="width: 200px;" placeholder="Enter your name here ..." required>
   <br>
-  <input type="submit" class="btn btn-outline-warning" value="Get on the Board" required>
+  <input type="submit" class="btn btn-outline-warning" value="Get on the Board">
   </form>
 </div>
 <br>
@@ -165,12 +165,38 @@ const app = {
 
   submitScore: function() {
     document.getElementById('submit-score').addEventListener('submit', function(e) {
-      console.log('submitted form')
+      const name = document.getElementById('submit-score').childNodes[1].value;
+      const score = parseInt(document.getElementById('score').childNodes[1].innerHTML);
+      app.submitData(name, score);
+      document.getElementById('submit-score').remove();
       e.preventDefault();
     })
-  }
+  },
 
+  submitData: function(name, score) {
+    const config = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({'name': name, 'score': score})
+    }
+    return fetch('http://localhost:3000/api/trivia/add_score', config)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(object) {
+      console.log(object);
+    })
+    .catch(function(error) {
+      alert("Failed to save score");
+      console.log(error.message);
+      return error.message;
+    });
+  }
 }
 
 document.addEventListener("DOMContentLoaded", app.init)
 
+  
