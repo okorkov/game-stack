@@ -1,4 +1,4 @@
-const domain = 'https://game-stack.herokuapp.com/'
+const domain = 'http://localhost:3000'
 // 'https://game-stack.herokuapp.com/'
 // 'http://localhost:3000'
 // Trivia Section
@@ -32,15 +32,17 @@ const triviaTemplate = `
   </div>`;
 
 const scoreForm = `
-<div class="col d-flex justify-content-center text-center">
+<div class="col d-flex justify-content-center text-center" id="score-button">
   <form action="/" method="post" id="submit-score">
   <input type="text" class="input-group" style="width: 200px;" placeholder="Enter your name here ..." required>
   <br>
   <input type="submit" class="btn btn-outline-warning" value="Get on the Board">
   </form>
 </div>
-<br>
-<table class="table table-dark table-striped table-bordered">
+<button id="play-again" class="btn btn-outline-success btn-lg">Play Again!</button>`;
+
+const scoreTable = `<br>
+<table class="table table-dark table-striped table-bordered" id="score-table">
   <thead>
     <tr>
       <th scope="col"><strong>Top Scores</strong></th>
@@ -49,8 +51,7 @@ const scoreForm = `
   </thead>
   <tbody id="table-body">
   </tbody>
-</table>
-<button id="play-again" class="btn btn-outline-success btn-lg">Play Again!</button>`;
+</table>`;
 
 
 
@@ -67,8 +68,10 @@ const app = {
   },
 
   openTrivia: function() {
-    document.getElementById('carousel').remove();
-    document.getElementById('carousel-parent').insertAdjacentHTML('afterend', triviaTemplate);
+    if(document.getElementById('carousel') != null) {
+      document.getElementById('carousel').remove();
+      document.getElementById('carousel-parent').insertAdjacentHTML('afterend', triviaTemplate);
+    }
     app.startGame();
   },
 
@@ -139,7 +142,10 @@ const app = {
   finishGame: function() {
     document.getElementById('question-and-answers').remove()
     document.getElementById('score').insertAdjacentHTML('afterend', scoreForm);
+    document.getElementById('score-button').insertAdjacentHTML('afterend', scoreTable);
     fetch(`${domain}/api/trivia/trivia_top_10_players`).then(object => object.json()).then(object => app.fillScores(object))
+    app.submitScore();
+    app.playAgain();
   },
 
   fillScores: function(object) {
@@ -151,8 +157,6 @@ const app = {
       <td>${object[i].name}</td>`
       tableBody.appendChild(tr);
     }
-    app.submitScore();
-    app.playAgain();
   },
 
   playAgain: function() {
@@ -169,7 +173,9 @@ const app = {
       const score = parseInt(document.getElementById('score').childNodes[1].innerHTML);
       app.submitData(name, score);
       document.getElementById('submit-score').remove();
-      //
+      document.getElementById('score-table').remove();
+      document.getElementById('score').insertAdjacentHTML('afterend', scoreTable);
+      app.updateScore()
       e.preventDefault();
     })
   },
@@ -183,14 +189,17 @@ const app = {
       },
       body: JSON.stringify({'name': name, 'score': score})
     }
-    return fetch('http://localhost:3000/api/trivia/add_score', config)
+    return fetch(`${domain}/api/trivia/add_score`, config)
     .then(function(response) {
       return response.text();
     }).catch(function(error) {
       alert("Failed to save score");
-      console.log(error.message);
       return error.message;
     });
+  },
+
+  updateScore: function() {
+    fetch(`${domain}/api/trivia/trivia_top_10_players`).then(object => object.json()).then(object => app.fillScores(object))
   }
 }
 
