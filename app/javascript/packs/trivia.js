@@ -1,4 +1,4 @@
-const domain = 'http://localhost:3000'
+const domain = 'https://game-stack.herokuapp.com/'
 // 'https://game-stack.herokuapp.com/'
 // 'http://localhost:3000'
 // Trivia Section
@@ -53,8 +53,6 @@ const scoreTable = `<br>
   </tbody>
 </table>`;
 
-let answerArray
-
 
 const app = {
 
@@ -75,30 +73,56 @@ const app = {
     app.startGame();
   },
 
+  startGame: function() {
+    app.renderQuestion(); 
+    document.addEventListener('click', function (e) {
+      if(e.target.matches('.questions')) {
+        e.target.className = 'col btn btn-warning questions';
+        app.checkAnswer(correctAnswer, e.target)
+      }
+    })
+  },
+
   renderQuestion: function() {
     fetch(`${domain}/api/trivia/random_question`).then(object => object.json()).then(object => {
       document.getElementById('question').innerHTML = `Question: ${object.question}`
-      correctAnswer = object.correct_answer;
-      let answers = [object.incorrect_answer_1, object.incorrect_answer_2, object.incorrect_answer_3, object.correct_answer]
+      correctAnswer = object.correct_answer; 
+      answers = [object.incorrect_answer_1, object.incorrect_answer_2, object.incorrect_answer_3, object.correct_answer]
       app.shuffle(answers);
-      let answerArray = document.getElementsByClassName("questions");
-      for(let i = 0; i < answerArray.length; i++) {
-        if(answers[i] === null || answers[i] === undefined){
-          answerArray[i].style.visibility = "hidden";
+      let answerButtons = document.getElementsByClassName("questions"); 
+      for(let i = 0; i < answerButtons.length; i++) {
+        if(answers[i] === null){
+          answerButtons[i].style.visibility = "hidden";
         } else {
-          answerArray[i].style.visibility = "visible";
-          answerArray[i].innerHTML = answers[i];
-          answerArray[i].addEventListener('click', function(e){
-            e.target.className = 'col btn btn-warning questions'
-            app.checkAnswer(correctAnswer, answerArray[i]);
-            return null;
-          })
+          answerButtons[i].style.visibility = "visible";
+          answerButtons[i].innerHTML = answers[i];
         }
       }
+      return null;
     });
   },
 
-   shuffle: function(array) {
+  checkAnswer: function(correctAnswer, selectAnswer) {
+    setTimeout(function(){
+      if (correctAnswer === selectAnswer.innerHTML) {
+        selectAnswer.className = 'col btn btn-success questions';
+        document.getElementById('score').childNodes[1].innerHTML = parseInt(document.getElementById('score').childNodes[1].innerHTML) + 100;
+        setTimeout(function(){
+          app.resetAnswerColors();
+          correctAnswer = null;
+          return app.renderQuestion();
+        }, 1000);
+      } else {
+        selectAnswer.className = 'col btn btn-danger questions';
+        setTimeout(function(){
+          alert(`Correct Answer is: ${correctAnswer}`);
+          return app.finishGame();
+        }, 1500)
+      }
+    }, 1000)
+  },
+
+  shuffle: function(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
     while (0 !== currentIndex) {
       randomIndex = Math.floor(Math.random() * currentIndex);
@@ -108,32 +132,6 @@ const app = {
       array[randomIndex] = temporaryValue;
     }
     return array;
-  },
-
-  startGame: function() {
-    app.renderQuestion(); 
-  },
-
-  checkAnswer: function(correctAnswer, selectAnswer) {
-    setTimeout(function(){
-      if (correctAnswer === selectAnswer.innerHTML) {
-        selectAnswer.className = 'col btn btn-success questions'
-        setTimeout(function(){
-          document.getElementById('score').childNodes[1].innerHTML = parseInt(document.getElementById('score').childNodes[1].innerHTML) + 100;
-          app.resetAnswerColors();
-          app.renderQuestion()
-          correctAnswer = null;
-          return null;
-        }, 1000);
-      } else {
-        selectAnswer.className = 'col btn btn-danger questions';
-        setTimeout(function(){
-          alert(`Correct Answer is: ${correctAnswer}`);
-          app.finishGame()
-        }, 1500)
-      }
-      return null;
-    }, 1000)
   },
 
   resetAnswerColors: function() {
