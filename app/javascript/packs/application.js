@@ -11,4 +11,4 @@ Rails.start()
 Turbolinks.start()
 
 require("packs/trivia")
-
+require("packs/flappy_dot")

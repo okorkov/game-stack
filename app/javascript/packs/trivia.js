@@ -1,7 +1,7 @@
-const domain = 'https://game-stack.herokuapp.com/'
+const domain = 'http://localhost:3000'
 // 'https://game-stack.herokuapp.com/'
 // 'http://localhost:3000'
-// Trivia Section
+
 const triviaTemplate = `
   <div class='p-5 text-center bg-image' id="trivia-template">
     <div class='mask' style='background-color: rgba(0, 0, 0, 0.6); padding: 50px; margin: 20px;'>
@@ -52,6 +52,7 @@ const scoreTable = `<br>
   <tbody id="table-body">
   </tbody>
 </table>`;
+
 
 
 const app = {
