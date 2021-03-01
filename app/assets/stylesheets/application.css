@@ -29,7 +29,7 @@
   padding-bottom: 7rem;
 }
 
-#canvas {
+canvas {
   position: relative;
   padding: 50px;
   margin: 50px;

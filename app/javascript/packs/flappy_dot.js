@@ -1,6 +1,6 @@
-document.addEventListener("DOMContentLoaded", flappyDotInit);
+document.addEventListener("DOMContentLoaded", flappyDotStart);
 
-function flappyDotInit() {
+function flappyDotStart() {
   document.getElementById('flappy-dot').addEventListener('click', (e) => {
     if(document.getElementById('carousel') !== null) {
       document.getElementById('carousel').remove();
@@ -29,8 +29,22 @@ function startFlappyGame() {
   }
 
   update() {
-    this.vy += this.weight;
-    this.y += this.vy;
+    let curve = Math.sin(angle) * 20;
+    if(this.y > canvas.height - (this.height * 3) + curve) {
+      this.y = canvas.height - (this.height * 3) + curve;
+      this.vy = 0;
+    } else {
+      this.vy += this.weight;
+      this.vy *= 0.9;
+      this.y += this.vy;
+    }
+    if(this.y < this.height) {
+      this.y = this.height
+      this.vy = 0;
+    }
+    if(spacePressed && this.y > this.height * 3) {
+      this.flap();
+    }
   }
 
   draw() {
@@ -49,8 +63,8 @@ const bird = new Bird();
   const canvas = document.getElementById('canvas1');
   const ctx = canvas.getContext('2d');
 
-  canvas.width = 600;
-  canvas.height = 400;
+  canvas.width = 800;
+  canvas.height = 600;
 
   let spacePressed = false;
   let angle = 0;
@@ -64,6 +78,7 @@ const bird = new Bird();
     bird.update();
     bird.draw();
     requestAnimationFrame(animate);
+    angle += 0.12;
   }
 
   animate();
