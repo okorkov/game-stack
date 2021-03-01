@@ -71,8 +71,8 @@ const app = {
       document.getElementById('carousel').remove();
       document.getElementById('carousel-parent').insertAdjacentHTML('afterend', triviaTemplate);
     }
-    if(document.getElementById('canvas') !== null) {
-      document.getElementById('canvas').remove();
+    if(document.getElementById('canvas1') !== null) {
+      document.getElementById('canvas1').remove();
       document.getElementById('carousel-parent').insertAdjacentHTML('afterend', triviaTemplate);
     }
     
