@@ -30,8 +30,7 @@
 }
 
 #canvas {
-  margin-right: auto;
-  margin-left: auto;
+  position: relative;
   padding: 50px;
   margin: 50px;
   width: 600px;

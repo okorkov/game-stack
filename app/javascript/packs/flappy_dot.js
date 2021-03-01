@@ -11,7 +11,6 @@ function flappyDotInit() {
     if( document.getElementById('canvas') === null ) {
       const canvas = document.createElement('canvas')
       canvas.setAttribute('id', 'canvas');
-      canvas.className = 'text-center';
       document.getElementById('carousel-parent').appendChild(canvas);
     }
   })
