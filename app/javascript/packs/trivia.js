@@ -124,6 +124,7 @@ const app = {
           for(let btn of btns){
             if(btn.innerHTML === correctAnswer) {
                 btn.className = 'col btn btn-info questions';
+                btn.style.color = 'yellow';
             }
           }
         setTimeout(function(){
