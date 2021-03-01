@@ -120,10 +120,15 @@ const app = {
         }, 1000);
       } else {
         selectAnswer.className = 'col btn btn-danger questions';
+        let btns = document.getElementsByClassName('questions')
+          for(let btn of btns){
+            if(btn.innerHTML === correctAnswer) {
+                btn.className = 'col btn btn-info questions';
+            }
+          }
         setTimeout(function(){
-          alert(`Correct Answer is: ${correctAnswer}`);
           return app.finishGame();
-        }, 1500)
+        }, 2500)
       }
     }, 1000)
   },
