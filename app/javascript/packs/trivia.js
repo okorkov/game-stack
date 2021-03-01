@@ -67,10 +67,15 @@ const app = {
   },
 
   openTrivia: function() {
-    if(document.getElementById('carousel') != null) {
+    if(document.getElementById('carousel') !== null) {
       document.getElementById('carousel').remove();
+      document.getElementById('carousel-parent').insertAdjacentHTML('afterend', triviaTemplate);
     }
-    document.getElementById('carousel-parent').insertAdjacentHTML('afterend', triviaTemplate);
+    if(document.getElementById('canvas') !== null) {
+      document.getElementById('canvas').remove();
+      document.getElementById('carousel-parent').insertAdjacentHTML('afterend', triviaTemplate);
+    }
+    
     app.startGame();
   },
 
