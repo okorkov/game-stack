@@ -58,6 +58,41 @@ function startFlappyGame() {
 
 }
 
+const particlesArray = [];
+
+class Particle {
+  constructor(){
+    this.x = bird.x;
+    this.y = bird.y;
+    this.size = Math.random() * 7 + 3;
+    this.speedY = (Math.random() * 1) - 0.5;
+    this.color = '#'+(Math.random()*0xFFFFFF<<0).toString(16)
+  }
+  update() {
+    this.x -= gameSpeed;
+    this.y += this.speedY
+  }
+  draw() {
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+function handleParticles() {
+  particlesArray.unshift(new Particle)
+  for(let i = 0; i < particlesArray.length; i++) {
+    particlesArray[i].update()
+    particlesArray[i].draw()
+  }
+  if(particlesArray.length > 200) {
+    for(let j = 0; j < 20; j++) {
+      particlesArray.pop(particlesArray[j]);
+    }
+  }
+}
+
 const bird = new Bird();
 
   const canvas = document.getElementById('canvas1');
@@ -77,6 +112,7 @@ const bird = new Bird();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     bird.update();
     bird.draw();
+    handleParticles();
     requestAnimationFrame(animate);
     angle += 0.12;
   }
