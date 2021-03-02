@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     get 'trivia/random_question'
     get 'trivia/trivia_top_10_players'
     post 'trivia/add_score'
+    get 'flappy_dot/flappy_dot_top_10_players'
+    post 'flappy_dot/add_score'
   end
 
 end
