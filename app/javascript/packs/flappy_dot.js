@@ -18,7 +18,7 @@ function flappyDotStart() {
 }
 
 function startFlappyGame() {
-  class Bird {
+  class Dot {
   constructor() {
     this.x = 150;
     this.y = 200;
@@ -48,8 +48,11 @@ function startFlappyGame() {
   }
 
   draw() {
-    ctx.fillStyle = 'red';
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+    ctx.fillStyle = 'black';
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.width, this.height, 2 * Math.PI);
+    ctx.stroke();
+    ctx.fill();
   }
 
   flap() {
@@ -62,8 +65,8 @@ const particlesArray = [];
 
 class Particle {
   constructor(){
-    this.x = bird.x;
-    this.y = bird.y;
+    this.x = dot.x;
+    this.y = dot.y;
     this.size = Math.random() * 7 + 3;
     this.speedY = (Math.random() * 1) - 0.5;
     this.color = '#'+(Math.random()*0xFFFFFF<<0).toString(16)
@@ -93,7 +96,7 @@ function handleParticles() {
   }
 }
 
-const bird = new Bird();
+const dot = new Dot();
 
   const canvas = document.getElementById('canvas1');
   const ctx = canvas.getContext('2d');
@@ -103,15 +106,14 @@ const bird = new Bird();
 
   let spacePressed = false;
   let angle = 0;
-  let hue = 0;
   let frame = 0;
   let score = 0;
   let gameSpeed = 2;
 
   function animate(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    bird.update();
-    bird.draw();
+    dot.update();
+    dot.draw();
     handleParticles();
     requestAnimationFrame(animate);
     angle += 0.12;
