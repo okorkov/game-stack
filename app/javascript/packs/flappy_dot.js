@@ -1,4 +1,4 @@
-const domain = 'http://localhost:3000'
+const domain = 'https://game-stack.herokuapp.com/'
 // 'https://game-stack.herokuapp.com/'
 // 'http://localhost:3000'
 
@@ -251,7 +251,7 @@ function submitData(name, score) {
 
 
 function updateScore() {
-
+  fetch(`${domain}/api/flappy_dot/flappy_dot_top_10_players`).then(object => object.json()).then(object => fillScores(object))
 }
 
 
