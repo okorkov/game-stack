@@ -48,7 +48,7 @@ function startFlappyGame() {
   }
 
   draw() {
-    ctx.fillStyle = 'black';
+    ctx.fillStyle = 'pink';
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.width, this.height, 2 * Math.PI);
     ctx.stroke();
@@ -160,13 +160,14 @@ function handleCollision() {
   let gameSpeed = 2;
 
   function animate(){
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     dot.update();
     dot.draw();
     ctx.fillStyle = 'red';
     ctx.font = '90px Georgia';
-    ctx.strokeText(score, 700, 70);
-    ctx.fillText(score, 700, 70);
+    ctx.strokeText(score, 650, 80);
+    ctx.fillText(score, 650, 80);
     handleParticles();
     handleObscacles();
     handleCollision();
@@ -174,9 +175,15 @@ function handleCollision() {
     requestAnimationFrame(animate);
     angle += 0.12;
     frame ++;
+    
   }
 
   animate();
+
+  const scoreCount = setInterval(function() {
+    score += 1;
+  }, 1000);
+
 
   window.addEventListener('keydown', function(e) {
     if (e.code === 'Space') spacePressed = true;
