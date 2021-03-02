@@ -22,7 +22,7 @@ function flappyDotStart() {
 }
 
 const scoreForm = `
-<div class='p-5 text-center bg-image' id="trivia-template">
+<div class='p-5 text-center bg-image' id="flappy-dot-template">
   <div class='mask' style='background-color: rgba(0, 0, 0, 0.6); padding: 50px; margin: 20px;'>
     <div class='d-flex justify-content-center align-items-center h-100'>
       <div class='text-white'>
@@ -186,6 +186,8 @@ function finishGame() {
     document.getElementById('carousel-parent').insertAdjacentHTML('afterend', scoreForm);
     document.getElementById('score-button').insertAdjacentHTML('afterend', scoreTable);
     fetch(`${domain}/api/flappy_dot/flappy_dot_top_10_players`).then(object => object.json()).then(object => fillScores(object))
+    submitScore();
+    playAgain();
   }, 2500)
 }
 
@@ -198,6 +200,24 @@ function fillScores(object) {
     <td>${object[i].name}</td>`
     tableBody.appendChild(tr);
   }
+}
+
+function playAgain() {
+  document.getElementById('play-again').addEventListener('click', function(e) {
+    document.getElementById('flappy-dot-template').remove();
+    const canvas = document.createElement('canvas')
+    canvas.setAttribute('id', 'canvas1');
+    document.getElementById('carousel-parent').appendChild(canvas);
+    startFlappyGame();
+    e.preventDefault();
+  })
+}
+
+function submitScore() {
+  document.getElementById('submit-score').addEventListener('submit', function(e) {
+    console.log('submit score')
+    e.preventDefault();
+  })
 }
 
 
