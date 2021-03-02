@@ -138,6 +138,9 @@ function handleCollision() {
       ((dot.y < 0 + pipe.top && dot.y + dot.height > 0) ||
       (dot.y > canvas.height - pipe.bottom &&
       dot.y + dot.height < canvas.height))) {
+        ctx.font = '30px sans-serif';
+        ctx.fillStyle = 'red';
+        ctx.fillText(`HAHA WHAT A LOOSER! SCORED ONLY: ${score}`, 40, canvas.height / 2 - 10);
         return true;
     }
   }
@@ -160,6 +163,10 @@ function handleCollision() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     dot.update();
     dot.draw();
+    ctx.fillStyle = 'red';
+    ctx.font = '90px Georgia';
+    ctx.strokeText(score, 700, 70);
+    ctx.fillText(score, 700, 70);
     handleParticles();
     handleObscacles();
     handleCollision();
