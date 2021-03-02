@@ -24,6 +24,8 @@ function flappyDotStart() {
   })
 }
 
+let score = 0;
+
 const scoreForm = `
 <div class='p-5 text-center bg-image' id="flappy-dot-template">
   <div class='mask' style='background-color: rgba(0, 0, 0, 0.6); padding: 50px; margin: 20px;'>
@@ -184,6 +186,7 @@ function handleCollision() {
 }
 
 function finishGame() {
+  clearInterval(scoreCount);
   setTimeout(function(){
     canvas.remove();
     document.getElementById('carousel-parent').insertAdjacentHTML('afterend', scoreForm);
@@ -218,7 +221,13 @@ function playAgain() {
 
 function submitScore() {
   document.getElementById('submit-score').addEventListener('submit', function(e) {
-    console.log('submit score')
+    console.log(score)
+    // const name = document.getElementById('submit-score').childNodes[1].value;
+    // submitData(name, score);
+    // document.getElementById('submit-score').remove();
+    // document.getElementById('score-table').remove();
+    // document.getElementById('score').insertAdjacentHTML('afterend', scoreTable);
+    // updateScore()
     e.preventDefault();
   })
 }
@@ -233,7 +242,6 @@ function submitScore() {
   let spacePressed = false;
   let angle = 0;
   let frame = 0;
-  let score = 0;
   let gameSpeed = 5;
 
   function animate(){
