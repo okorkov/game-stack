@@ -6,6 +6,9 @@
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import "channels"
+import * as dotenv from 'dotenv';
+
+const config = dotenv.config().parsed;
 
 Rails.start()
 Turbolinks.start()

@@ -1,3 +1,7 @@
+const domain = 'http://localhost:3000'
+// 'https://game-stack.herokuapp.com/'
+// 'http://localhost:3000'
+
 document.addEventListener("DOMContentLoaded", flappyDotStart);
 
 function flappyDotStart() {
@@ -181,7 +185,19 @@ function finishGame() {
     canvas.remove();
     document.getElementById('carousel-parent').insertAdjacentHTML('afterend', scoreForm);
     document.getElementById('score-button').insertAdjacentHTML('afterend', scoreTable);
+    fetch(`${domain}/api/flappy_dot/flappy_dot_top_10_players`).then(object => object.json()).then(object => fillScores(object))
   }, 2500)
+}
+
+function fillScores(object) {
+  const tableBody = document.getElementById('table-body')
+  for(let i = 0; i < object.length; i++) {
+    let tr = document.createElement('tr');
+    tr.innerHTML = `
+    <td>${object[i].score}</td>
+    <td>${object[i].name}</td>`
+    tableBody.appendChild(tr);
+  }
 }
 
 
