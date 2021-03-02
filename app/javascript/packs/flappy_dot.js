@@ -119,7 +119,7 @@ class Obscacle {
 }
 
 function handleObscacles() {
-  if(frame % 50 === 0) {
+  if(frame % 40 === 0) {
     obstaclesArray.unshift(new Obscacle);
   }
   for(let i = 0; i < obstaclesArray.length; i++) {
@@ -127,6 +127,19 @@ function handleObscacles() {
   }
   if(obstaclesArray.length > 40) {
     obstaclesArray.pop(obstaclesArray[0])
+  }
+}
+
+function handleCollision() {
+  for(let i = 0; i < obstaclesArray.length; i++) {
+    const pipe = obstaclesArray[i];
+    if(dot.x < pipe.x + pipe.width &&
+      dot.x + dot.width > pipe.x &&
+      ((dot.y < 0 + pipe.top && dot.y + dot.height > 0) ||
+      (dot.y > canvas.height - pipe.bottom &&
+      dot.y + dot.height < canvas.height))) {
+        return true;
+    }
   }
 }
 
@@ -149,6 +162,8 @@ function handleObscacles() {
     dot.draw();
     handleParticles();
     handleObscacles();
+    handleCollision();
+    if(handleCollision()) return;
     requestAnimationFrame(animate);
     angle += 0.12;
     frame ++;
