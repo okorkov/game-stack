@@ -1,4 +1,4 @@
-const domain = 'https://game-stack.herokuapp.com/'
+const domain = 'http://localhost:3000'
 // 'https://game-stack.herokuapp.com/'
 // 'http://localhost:3000'
 
