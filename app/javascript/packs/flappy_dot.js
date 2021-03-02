@@ -60,6 +60,7 @@ function startFlappyGame() {
   }
 
 }
+const dot = new Dot();
 
 const particlesArray = [];
 
@@ -69,7 +70,7 @@ class Particle {
     this.y = dot.y;
     this.size = Math.random() * 7 + 3;
     this.speedY = (Math.random() * 1) - 0.5;
-    this.color = '#'+(Math.random()*0xFFFFFF<<0).toString(16)
+    this.color = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
   }
   update() {
     this.x -= gameSpeed;
@@ -96,7 +97,39 @@ function handleParticles() {
   }
 }
 
-const dot = new Dot();
+const obstaclesArray = [];
+
+class Obscacle {
+  constructor() {
+    this.top = (Math.random() * canvas.height / 3) + 20;
+    this.bottom = (Math.random() * canvas.height / 3) + 20;
+    this.x = canvas.height;
+    this.width = 20;
+    this.color = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+  }
+  draw() {
+    ctx.fillStyle = this.color;
+    ctx.fillRect(this.x, 0 , this.width, this.top);
+    ctx.fillRect(this.x, canvas.height - this.bottom, this.width, this.bottom);
+  }
+  update() {
+    this.x -= gameSpeed;
+    this.draw();
+  }
+}
+
+function handleObscacles() {
+  if(frame % 50 === 0) {
+    obstaclesArray.unshift(new Obscacle);
+  }
+  for(let i = 0; i < obstaclesArray.length; i++) {
+    obstaclesArray[i].update();
+  }
+  if(obstaclesArray.length > 40) {
+    obstaclesArray.pop(obstaclesArray[0])
+  }
+}
+
 
   const canvas = document.getElementById('canvas1');
   const ctx = canvas.getContext('2d');
@@ -115,8 +148,10 @@ const dot = new Dot();
     dot.update();
     dot.draw();
     handleParticles();
+    handleObscacles();
     requestAnimationFrame(animate);
     angle += 0.12;
+    frame ++;
   }
 
   animate();
