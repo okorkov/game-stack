@@ -14,7 +14,7 @@ Trivia - a game where the you are being asked questions about interesting but un
 
 ![game stack welcome screen](/app/assets/images/dot.png?raw=true "Title")
 
-Flappy Dot - is my interpretation for famously known "Flappy Bird" game. Flappy Dot is build on html 5 canvas element. The is trying to fight the gravity rule by staying up in the air and avoiding pipes (use space on laptops or touch the screen on mobile devices). Your score is incrementing by 1 every second with an idea of longer you stay in the air without collision, more point you get. 
+Flappy Dot - is my interpretation for famously known "Flappy Bird" game. Flappy Dot is build on html 5 canvas element. The Dot is trying to fight the gravity by staying up in the air and avoiding pipes (use space on laptops or touch the screen on mobile devices). Your score is incrementing by 1 every second with an idea of longer you stay in the air without collision  more point you'll get. 
 
 Download Instruction:
 
