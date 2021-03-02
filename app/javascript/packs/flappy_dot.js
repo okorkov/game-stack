@@ -12,6 +12,9 @@ function flappyDotStart() {
     if(document.getElementById('trivia-template') !== null) {
       document.getElementById('trivia-template').remove();
     }
+    if(document.getElementById('flappy-dot-template') !== null) {
+      document.getElementById('flappy-dot-template').remove();
+    } 
     if( document.getElementById('canvas1') === null ) {
       const canvas = document.createElement('canvas')
       canvas.setAttribute('id', 'canvas1');
