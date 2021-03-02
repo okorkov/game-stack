@@ -221,15 +221,37 @@ function playAgain() {
 
 function submitScore() {
   document.getElementById('submit-score').addEventListener('submit', function(e) {
-    console.log(score)
-    // const name = document.getElementById('submit-score').childNodes[1].value;
-    // submitData(name, score);
-    // document.getElementById('submit-score').remove();
-    // document.getElementById('score-table').remove();
-    // document.getElementById('score').insertAdjacentHTML('afterend', scoreTable);
-    // updateScore()
+    const name = document.getElementById('submit-score').childNodes[1].value;
+    submitData(name, score);
+    document.getElementById('submit-score').remove();
+    document.getElementById('score-table').remove();
+    document.getElementById('score-button').insertAdjacentHTML('afterend', scoreTable);
+    updateScore()
     e.preventDefault();
   })
+}
+
+function submitData(name, score) {
+  const config = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify({'name': name, 'score': score})
+  }
+  return fetch(`${domain}/api/flappy_dot/add_score`, config)
+  .then(function(response) {
+    return response.text();
+  }).catch(function(error) {
+    alert("Failed to save score");
+    return error.message;
+  });
+}
+
+
+function updateScore() {
+
 }
 
 
