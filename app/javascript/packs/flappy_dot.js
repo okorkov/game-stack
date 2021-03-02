@@ -17,6 +17,36 @@ function flappyDotStart() {
   })
 }
 
+const scoreForm = `
+<div class='p-5 text-center bg-image' id="trivia-template">
+  <div class='mask' style='background-color: rgba(0, 0, 0, 0.6); padding: 50px; margin: 20px;'>
+    <div class='d-flex justify-content-center align-items-center h-100'>
+      <div class='text-white'>
+        <div class="col d-flex justify-content-center text-center" id="score-button">
+          <form action="/" method="post" id="submit-score">
+          <input type="text" class="input-group" style="width: 200px;" placeholder="Enter your name here ..." required>
+          <br>
+          <input type="submit" class="btn btn-outline-warning" value="Get on the Board">
+          </form>
+        </div>
+        <button id="play-again" class="btn btn-outline-success btn-lg">Play Again!</button>
+      </div>
+    </div>
+  </div>
+</div>`;
+
+const scoreTable = `<br>
+<table class="table table-dark table-striped table-bordered" id="score-table">
+  <thead>
+    <tr>
+      <th scope="col"><strong>Top Scores</strong></th>
+      <th scope="col"><strong>Gamer's Name</strong></th>
+    </tr>
+  </thead>
+  <tbody id="table-body">
+  </tbody>
+</table>`;
+
 function startFlappyGame() {
   class Dot {
   constructor() {
@@ -146,6 +176,14 @@ function handleCollision() {
   }
 }
 
+function finishGame() {
+  setTimeout(function(){
+    canvas.remove();
+    document.getElementById('carousel-parent').insertAdjacentHTML('afterend', scoreForm);
+    document.getElementById('score-button').insertAdjacentHTML('afterend', scoreTable);
+  }, 2500)
+}
+
 
   const canvas = document.getElementById('canvas1');
   const ctx = canvas.getContext('2d');
@@ -171,7 +209,7 @@ function handleCollision() {
     handleParticles();
     handleObscacles();
     handleCollision();
-    if(handleCollision()) return;
+    if(handleCollision()) return finishGame();
     requestAnimationFrame(animate);
     angle += 0.12;
     frame ++;
