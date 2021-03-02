@@ -300,5 +300,12 @@ function updateScore() {
     if (e.code === 'Space') spacePressed = false;
   })
 
+  window.addEventListener('touchstart', function(e) {
+    spacePressed = true;
+  }, false)
+
+  window.addEventListener('touchend', function(e) {
+    spacePressed = false;
+  }, false)
 
 }
