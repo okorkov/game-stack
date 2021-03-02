@@ -119,7 +119,7 @@ class Obscacle {
 }
 
 function handleObscacles() {
-  if(frame % 40 === 0) {
+  if(frame % 20 === 0) {
     obstaclesArray.unshift(new Obscacle);
   }
   for(let i = 0; i < obstaclesArray.length; i++) {
@@ -140,7 +140,7 @@ function handleCollision() {
       dot.y + dot.height < canvas.height))) {
         ctx.font = '30px sans-serif';
         ctx.fillStyle = 'red';
-        ctx.fillText(`HAHA WHAT A LOOSER! SCORED ONLY: ${score}`, 40, canvas.height / 2 - 10);
+        ctx.fillText(`HAHA WHAT A LOOSER! SCORED ONLY: ${score}`, 60, canvas.height / 2);
         return true;
     }
   }
@@ -157,7 +157,7 @@ function handleCollision() {
   let angle = 0;
   let frame = 0;
   let score = 0;
-  let gameSpeed = 2;
+  let gameSpeed = 5;
 
   function animate(){
     ctx.fillStyle = 'black';

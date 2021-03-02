@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_25_200132) do
+ActiveRecord::Schema.define(version: 2021_03_02_165805) do
+
+  create_table "flappy_dot_scores", force: :cascade do |t|
+    t.string "name"
+    t.string "score"
+  end
 
   create_table "trivia", force: :cascade do |t|
     t.string "category"

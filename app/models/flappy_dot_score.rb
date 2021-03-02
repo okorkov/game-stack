@@ -1,0 +1,2 @@
+class FlappyDotScore < ApplicationRecord
+end
