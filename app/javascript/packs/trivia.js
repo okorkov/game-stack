@@ -205,7 +205,7 @@ const app = {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify({'name': name, 'score': score})
+      body: JSON.stringify({'name': name, 'score': score, 'game_id': 2})
     }
     return fetch(`${domain}/api/trivia/add_score`, config)
     .then(function(response) {

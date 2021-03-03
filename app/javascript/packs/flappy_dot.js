@@ -238,7 +238,7 @@ function submitData(name, score) {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     },
-    body: JSON.stringify({'name': name, 'score': score})
+    body: JSON.stringify({'name': name, 'score': score, 'game_id': 2})
   }
   return fetch(`${domain}/api/flappy_dot/add_score`, config)
   .then(function(response) {

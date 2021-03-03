@@ -14,7 +14,7 @@ class Api::FlappyDotController < ApplicationController
   private
 
   def score_params
-    {name: params[:name], score: params[:score]}
+    {name: params[:name], score: params[:score] , game_id: params[:game_id]}
   end
 
 end
