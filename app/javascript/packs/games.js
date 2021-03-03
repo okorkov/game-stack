@@ -40,10 +40,10 @@ const scoreTable = `
   </div>`;
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById('all-scores').addEventListener("click", () => renderContent())
+  document.getElementById('all-scores').addEventListener("click", () => renderPage())
 })
 
-function renderContent() {
+function renderPage() {
   if(document.getElementById('carousel') !== null) {
     document.getElementById('carousel').remove();
   }
@@ -57,6 +57,10 @@ function renderContent() {
     document.getElementById('trivia-template').remove();
   }
   document.getElementById('carousel-parent').insertAdjacentHTML('afterend', scoreTable);
+  fetch(`${domain}/api/games/all_scores`).then(object => object.json()).then(object => renderScore(object));
 }
 
-fetch(`${domain}/api/games/all_scores`).then(object => object.json()).then(object => console.log(object))
+function renderScore(object) {
+  console.log(object[0].trivia_scores);
+}
+
