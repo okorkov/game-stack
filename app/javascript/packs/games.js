@@ -1,4 +1,4 @@
-const domain = 'http://localhost:3000'
+const domain = 'https://game-stack.herokuapp.com/'
 // 'https://game-stack.herokuapp.com/'
 // 'http://localhost:3000'
 
@@ -61,6 +61,22 @@ function renderPage() {
 }
 
 function renderScore(object) {
-  console.log(object[0].trivia_scores);
+  const tableBodyTrivia = document.getElementById('table-body-trivia')
+    for(let i = 0; i < object[0].trivia_scores.length; i++) {
+      let tr = document.createElement('tr');
+      tr.innerHTML = `
+      <td>${object[0].trivia_scores[i].score}</td>
+      <td>${object[0].trivia_scores[i].name}</td>`
+      tableBodyTrivia.appendChild(tr);
+    }
+    const tableBodyFlappy = document.getElementById('table-body-flappy-dot')
+    for(let j = 0; j < object[1].flappy_dot_scores.length; j++) {
+      let tr = document.createElement('tr');
+      tr.innerHTML = `
+      <td>${object[1].flappy_dot_scores[j].score}</td>
+      <td>${object[1].flappy_dot_scores[j].name}</td>`
+      tableBodyFlappy.appendChild(tr);
+    }
+
 }
 
