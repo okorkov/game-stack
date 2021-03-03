@@ -15,3 +15,4 @@ Turbolinks.start()
 
 require("packs/trivia")
 require("packs/flappy_dot")
+require("packs/games")
