@@ -79,6 +79,10 @@ const app = {
     if(document.getElementById('trivia-template') !== null) {
       document.getElementById('trivia-template').remove();
     }
+    if(document.getElementById('score-table') !== null) {
+      document.getElementById('score-table').remove();
+      document.getElementById('score-button').remove();
+    }
     document.getElementById('carousel-parent').insertAdjacentHTML('afterend', triviaTemplate);
     document.getElementById('navbarToggleExternalContent').className = "collapse"
     app.startGame();

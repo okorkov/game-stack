@@ -15,6 +15,10 @@ function flappyDotStart() {
     if(document.getElementById('flappy-dot-template') !== null) {
       document.getElementById('flappy-dot-template').remove();
     } 
+    if(document.getElementById('score-table') !== null) {
+      document.getElementById('score-table').remove();
+      document.getElementById('score-button').remove();
+    }
     if( document.getElementById('canvas1') === null ) {
       const canvas = document.createElement('canvas')
       canvas.setAttribute('id', 'canvas1');

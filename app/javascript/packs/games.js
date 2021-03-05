@@ -56,6 +56,10 @@ function renderPage() {
   if(document.getElementById('trivia-template') !== null) {
     document.getElementById('trivia-template').remove();
   }
+  if(document.getElementById('score-table') !== null) {
+    document.getElementById('score-table').remove();
+    document.getElementById('score-button').remove();
+  }
   document.getElementById('carousel-parent').insertAdjacentHTML('afterend', scoreTable);
   fetch(`${domain}/api/games/all_scores`).then(object => object.json()).then(object => renderScore(object));
 }
