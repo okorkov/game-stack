@@ -19,7 +19,13 @@ function flappyDotStart() {
       const canvas = document.createElement('canvas')
       canvas.setAttribute('id', 'canvas1');
       document.getElementById('carousel-parent').appendChild(canvas);
+      const instruction = document.createElement('h2')
+      instruction.innerHTML = "Press 'SPACE' to Fly";
+      instruction.style = "color:yellow;"
+      document.getElementById('carousel-parent').appendChild(instruction);
+      
     }
+    document.getElementById('navbarToggleExternalContent').className = "collapse"
     startFlappyGame();
   })
 }
@@ -140,8 +146,8 @@ const obstaclesArray = [];
 
 class Obscacle {
   constructor() {
-    this.top = (Math.random() * canvas.height / 3) + 20;
-    this.bottom = (Math.random() * canvas.height / 3) + 20;
+    this.top = (Math.random() * canvas.height / 3) + 50;
+    this.bottom = (Math.random() * canvas.height / 3) + 50;
     this.x = canvas.height;
     this.width = 20;
     this.color = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
@@ -191,7 +197,8 @@ function finishGame() {
     canvas.remove();
     document.getElementById('carousel-parent').insertAdjacentHTML('afterend', scoreForm);
     document.getElementById('score-button').insertAdjacentHTML('afterend', scoreTable);
-    fetch(`${domain}/api/flappy_dot/flappy_dot_top_10_players`).then(object => object.json()).then(object => fillScores(object))
+    fetch(`${domain}/api/flappy_dot/flappy_dot_top_10_players`).then(object => object.json()).then(object => fillScores(object));
+    document.querySelector('h2').remove();
     submitScore();
     playAgain();
   }, 1000)
@@ -214,6 +221,10 @@ function playAgain() {
     const canvas = document.createElement('canvas')
     canvas.setAttribute('id', 'canvas1');
     document.getElementById('carousel-parent').appendChild(canvas);
+    const instruction = document.createElement('h2')
+    instruction.innerHTML = "Press 'SPACE' to Fly";
+    instruction.style = "color:yellow;"
+    document.getElementById('carousel-parent').appendChild(instruction);
     startFlappyGame();
     e.preventDefault();
   })

@@ -80,6 +80,7 @@ const app = {
       document.getElementById('trivia-template').remove();
     }
     document.getElementById('carousel-parent').insertAdjacentHTML('afterend', triviaTemplate);
+    document.getElementById('navbarToggleExternalContent').className = "collapse"
     app.startGame();
   },
 
