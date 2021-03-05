@@ -69,22 +69,23 @@ const app = {
   openTrivia: function() {
     if(document.getElementById('carousel') !== null) {
       document.getElementById('carousel').remove();
-      document.getElementById('carousel-parent').insertAdjacentHTML('afterend', triviaTemplate);
     }
     if(document.getElementById('flappy-dot-template') !== null) {
       document.getElementById('flappy-dot-template').remove();
-      document.getElementById('carousel-parent').insertAdjacentHTML('afterend', triviaTemplate);
     } 
     if(document.getElementById('canvas1') !== null) {
       document.getElementById('canvas1').remove();
-      document.getElementById('carousel-parent').insertAdjacentHTML('afterend', triviaTemplate);
     }
+    if(document.getElementById('trivia-template') !== null) {
+      document.getElementById('trivia-template').remove();
+    }
+    document.getElementById('carousel-parent').insertAdjacentHTML('afterend', triviaTemplate);
     app.startGame();
   },
 
   startGame: function() {
     app.renderQuestion(); 
-    document.addEventListener('click', function (e) {
+    document.addEventListener('click', (e) => {
       if(e.target.matches('.questions')) {
         e.target.className = 'col btn btn-warning questions';
         app.checkAnswer(correctAnswer, e.target)
@@ -132,7 +133,7 @@ const app = {
           }
         setTimeout(function(){
           return app.finishGame();
-        }, 2500)
+        }, 1500)
       }
     }, 1000)
   },

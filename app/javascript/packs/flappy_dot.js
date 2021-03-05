@@ -194,7 +194,7 @@ function finishGame() {
     fetch(`${domain}/api/flappy_dot/flappy_dot_top_10_players`).then(object => object.json()).then(object => fillScores(object))
     submitScore();
     playAgain();
-  }, 2500)
+  }, 1000)
 }
 
 function fillScores(object) {
